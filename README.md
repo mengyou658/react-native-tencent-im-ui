@@ -27,10 +27,84 @@ react-native 0.60 以上版本
 
 ### 2. link
 react-native 0.60以上 使用的autolink
-## Usage
+##  接口
 ```javascript
-import TximUi from 'react-native-txim-ui';
 
-// TODO: What to do with the module?
-TximUi;
+/**
+ * 初始化
+ * @param sdkAppId
+ */
+export function initSdk(sdkAppId);
+/**
+ * 登录
+ * @param userId 用户id
+ * @param userSig 用户sig
+ * @returns {*|PromiseLike<*>|Promise<*>}
+ */
+export function login(userId, userSig);
+
+/**
+ * 登出
+ * @returns {Promise<*>}
+ */
+export async function logout();
+
+/**
+ * 从其他界面跳转到聊天界面
+ * @param userId im用户id
+ * @param conTitle 聊天标题
+ * @param type:
+ *  1 = 用户会话
+ *  2 = 分组会话
+ */
+export function startChat(userId, conTitle, type = 1);
+
+
+```
+## 使用示例
+
+先初始化
+```javascript
+import {ConversationView, initSdk, login, logout, startChat} from 'react-native-txim-ui';
+// 先初始化
+initSdk(sdkAppId);
+```
+
+// 调用登录
+```javascript
+import {ConversationView, initSdk, login, logout, startChat} from 'react-native-txim-ui';
+// 调用登录
+login(userId, userSig).then(res=>{
+  console.log(res);
+}).catch(e => {
+});
+```
+
+// 从其他界面跳转打开会话
+```javascript
+import {ConversationView, initSdk, login, logout, startChat} from 'react-native-txim-ui';
+// 从其他界面跳转打开会话
+startChat(userId, "xxx聊天", 1);
+
+```
+
+展示聊天列表界面
+```javascript
+
+// 展示聊天列表界面
+import {ConversationView, initSdk, login, logout, startChat} from 'react-native-txim-ui';
+import React from "react";
+
+export default class Conversation extends React.Component {
+
+  render() {
+    return <SafeAreaView style={{flex:1, paddingTop: (Platform.OS === 'ios' ?  10 : StatusBar.currentHeight)}}>
+      <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={"dark-content"} animated={true} />
+      <ConversationView style={{ flex: 1 }}  {...this.props} />
+    </SafeAreaView>
+  }
+
+}
+
+
 ```
