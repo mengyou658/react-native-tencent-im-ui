@@ -1,0 +1,49 @@
+{
+  "name": "react-native-txim-ui",
+  "title": "React Native Tencent IM With UI ",
+  "version": "1.0.0",
+  "description": "腾讯云即时通信 IM 服务的react-native，使用原生ui版本的sdk",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "android",
+    "index.js",
+    "ios",
+    "lib",
+    "react-native-txim-ui.podspec"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "npm:publish": "npm --registry https://registry.npmjs.org/ publish",
+    "npm:sync": "cnpm sync react-native-txim-ui",
+    "pod:lint": "export LANG=en_US.UTF-8 && pod lib lint react-native-txim-ui.podspec",
+    "pod:install": "cd ios && export LANG=en_US.UTF-8 && pod install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mengyou658/react-native-txim-ui.git",
+    "baseUrl": "https://github.com/mengyou658/react-native-txim-ui"
+  },
+  "keywords": [
+    "react-native",
+    "txim",
+    "tencent",
+    "im",
+    "chat"
+  ],
+  "author": {
+    "name": "yunchaoq",
+    "email": "mengyou658@163.com"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "^16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x"
+  },
+  "devDependencies": {
+    "react": "^16.9.0",
+    "react-native": "^0.61.5"
+  }
+}
