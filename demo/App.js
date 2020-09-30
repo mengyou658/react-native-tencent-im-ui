@@ -35,13 +35,12 @@ let userIdTo = '梦游';
 
 class App extends Component {
 
-  componentDidMount() {
+  async componentDidMount() {
     // 先初始化
     try {
       TIMInitSdk(SDKAPPID);
-      console.log('success')
       Toast.success("初始化成功");
-      TIMLogin(userId, genTestUserSig(userId)).then(res=>{
+      TIMLogin(userId, await genTestUserSig(userId)).then(res=>{
         Toast.success(userId + "登录成功");
       }).catch(e => {
         Toast.fail(userId + "登录失败");

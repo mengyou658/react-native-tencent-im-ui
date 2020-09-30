@@ -29,7 +29,7 @@ public class DemoModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getSig(String sdkAppId, String appsec, String userId, Promise promise) {
+    public void getSig(int sdkAppId, String appsec, String userId, Promise promise) {
         String res = GenerateTestUserSig.genTestUserSig(Long.valueOf(sdkAppId), appsec, userId);
         promise.resolve(res);
     }
