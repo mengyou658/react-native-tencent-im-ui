@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import com.tencent.qcloud.tim.uikit.TUIKit;
 import com.tencent.qcloud.tim.uikit.base.IMEventListener;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
-import com.yunchao.tencentim.IMApplication;
 import com.yunchao.tencentim.R;
 import com.yunchao.tencentim.common.Constants;
 import com.yunchao.tencentim.utils.IMLog;
@@ -23,15 +22,6 @@ import com.yunchao.tencentim.utils.IMLog;
 public class BaseActivity extends Activity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
-
-    // 监听做成静态可以让每个子类重写时都注册相同的一份。
-    private static IMEventListener mIMEventListener = new IMEventListener() {
-        @Override
-        public void onForceOffline() {
-            ToastUtil.toastLongMessage("您的帐号已在其它终端登录");
-            logout(IMApplication.getContext(), false);
-        }
-    };
 
     public static void logout(Context context, boolean autoLogin) {
         SharedPreferences shareInfo = context.getSharedPreferences(Constants.USERINFO, Context.MODE_PRIVATE);
@@ -55,7 +45,13 @@ public class BaseActivity extends Activity {
             getWindow().getDecorView().setSystemUiVisibility(vis);
         }
 
-        TUIKit.addIMEventListener(mIMEventListener);
+        TUIKit.addIMEventListener(new IMEventListener() {
+            @Override
+            public void onForceOffline() {
+                ToastUtil.toastLongMessage("您的帐号已在其它终端登录");
+                logout(BaseActivity.this.getApplicationContext(), false);
+            }
+        });
     }
 
     @Override
@@ -65,7 +61,7 @@ public class BaseActivity extends Activity {
         SharedPreferences shareInfo = getSharedPreferences(Constants.USERINFO, Context.MODE_PRIVATE);
         boolean login = shareInfo.getBoolean(Constants.AUTO_LOGIN, false);
         if (!login) {
-            BaseActivity.logout(IMApplication.getContext(), false);
+            BaseActivity.logout(getApplicationContext(), false);
         }
     }
 

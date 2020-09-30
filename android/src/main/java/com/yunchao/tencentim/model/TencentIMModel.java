@@ -2,9 +2,6 @@ package com.yunchao.tencentim.model;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Environment;
-import android.util.Log;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -18,40 +15,37 @@ import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
 import com.tencent.qcloud.tim.uikit.config.GeneralConfig;
 import com.tencent.qcloud.tim.uikit.config.TUIKitConfigs;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
-import com.tencent.qcloud.tim.uikit.utils.FileUtil;
-import com.yunchao.tencentim.IMApplication;
 import com.yunchao.tencentim.activity.ChatActivity;
 import com.yunchao.tencentim.common.Constants;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class TencentIMModule extends ReactContextBaseJavaModule {
+public class TencentIMModel extends ReactContextBaseJavaModule {
 
-    public TencentIMModule(ReactApplicationContext reactContext) {
+    public TencentIMModel(ReactApplicationContext reactContext) {
         super(reactContext);
     }
 
 
     @Override
     public String getName() {
-        return "TencentIMModule";
+        return "TencentIMModel";
     }
 
     public TUIKitConfigs getConfigs() {
         GeneralConfig config = new GeneralConfig();
         // 显示对方是否已读的view将会展示
         config.setShowRead(true);
-        config.setAppCacheDir(IMApplication.getContext().getFilesDir().getPath());
+        config.setAppCacheDir(getReactApplicationContext().getFilesDir().getPath());
         TUIKit.getConfigs().setGeneralConfig(config);
         return TUIKit.getConfigs();
     }
 
     @ReactMethod
     public void initSdk(final int sdkAppId) {
-        TUIKit.init(IMApplication.getContext(), sdkAppId, getConfigs());
+        TUIKit.init(getReactApplicationContext(), sdkAppId, getConfigs());
     }
 
     @ReactMethod

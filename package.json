@@ -1,7 +1,7 @@
 {
-  "name": "react-native-txim-ui",
+  "name": "react-native-tencent-im-ui",
   "title": "React Native Tencent IM With UI ",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "腾讯云即时通信 IM 服务的react-native，使用原生ui版本的sdk",
   "main": "index.js",
   "files": [
@@ -10,19 +10,20 @@
     "index.js",
     "ios",
     "lib",
-    "react-native-txim-ui.podspec"
+    "react-native-tencent-im-ui.podspec"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "npm:publish": "npm --registry https://registry.npmjs.org/ publish",
-    "npm:sync": "cnpm sync react-native-txim-ui",
-    "pod:lint": "export LANG=en_US.UTF-8 && pod lib lint react-native-txim-ui.podspec",
+    "npm:unpublish": "npm --registry https://registry.npmjs.org/ unpublish react-native-tencent-im-ui --force",
+    "npm:sync": "cnpm sync react-native-tencent-im-ui",
+    "pod:lint": "export LANG=en_US.UTF-8 && pod lib lint react-native-tencent-im-ui.podspec",
     "pod:install": "cd ios && export LANG=en_US.UTF-8 && pod install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mengyou658/react-native-txim-ui.git",
-    "baseUrl": "https://github.com/mengyou658/react-native-txim-ui"
+    "url": "git+https://github.com/mengyou658/react-native-tencent-im-ui.git",
+    "baseUrl": "https://github.com/mengyou658/react-native-tencent-im-ui"
   },
   "keywords": [
     "react-native",

@@ -37,11 +37,6 @@ public class TencentIMConversationModel extends SimpleViewManager<View> {
         return conversationView;
     }
 
-    private View createSimpleView(ThemedReactContext reactContext) {
-        View simpleView = LayoutInflater.from(reactContext).inflate(R.layout.simple_view, null);
-        return simpleView;
-    }
-
     private void initConversationView(View conversationView, final Context context) {
         // 从布局文件中获取会话列表面板
         mConversationLayout = conversationView.findViewById(R.id.conversation_layout);

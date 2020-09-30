@@ -71,7 +71,7 @@ rejecter:(RCTPromiseRejectBlock)reject){
 /**
  * 开启会话
  */
-RCT_EXPORT_METHOD(startChat: (NSString *)identify
+RCT_EXPORT_METHOD(startChatView: (NSString *)identify
                        title:(NSString *)title
                        type:(int)type){
   // NSLog(@"startChat：%@",identify);

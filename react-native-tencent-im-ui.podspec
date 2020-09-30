@@ -3,7 +3,7 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "react-native-txim-ui"
+  s.name         = "react-native-tencent-im-ui"
   s.version          = package['version']
   s.summary          = package['description']
   s.description      = package['description']
