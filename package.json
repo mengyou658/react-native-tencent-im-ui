@@ -1,7 +1,7 @@
 {
   "name": "react-native-tencent-im-ui",
   "title": "React Native Tencent IM With UI ",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "腾讯云即时通信 IM 服务的react-native，使用原生ui版本的sdk",
   "main": "index.js",
   "files": [

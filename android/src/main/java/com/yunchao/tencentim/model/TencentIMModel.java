@@ -38,14 +38,14 @@ public class TencentIMModel extends ReactContextBaseJavaModule {
         GeneralConfig config = new GeneralConfig();
         // 显示对方是否已读的view将会展示
         config.setShowRead(true);
-        config.setAppCacheDir(getReactApplicationContext().getFilesDir().getPath());
+        config.setAppCacheDir(getReactApplicationContext().getBaseContext().getFilesDir().getPath());
         TUIKit.getConfigs().setGeneralConfig(config);
         return TUIKit.getConfigs();
     }
 
     @ReactMethod
     public void initSdk(final int sdkAppId) {
-        TUIKit.init(getReactApplicationContext(), sdkAppId, getConfigs());
+        TUIKit.init(getReactApplicationContext().getBaseContext(), sdkAppId, getConfigs());
     }
 
     @ReactMethod
@@ -97,24 +97,28 @@ public class TencentIMModel extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startChatView(String userId, String conTitle, int type) {
+    public void startChatView(final String userId, final String conTitle, final int type) {
+
         try {
-            Activity activity = getCurrentActivity();
+            final Activity activity = getCurrentActivity();
             if (activity != null) {
-
-                ChatInfo chatInfo = new ChatInfo();
-                if (type == 2) {
-                    chatInfo.setType(TIMConversationType.Group.value());
-                } else {
-                    chatInfo.setType(TIMConversationType.C2C.value());
-                }
-                chatInfo.setId(userId);
-                chatInfo.setChatName(conTitle);
-                Intent intent = new Intent(activity, ChatActivity.class);
-                intent.putExtra(Constants.CHAT_INFO, chatInfo);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ChatInfo chatInfo = new ChatInfo();
+                        if (type == 2) {
+                            chatInfo.setType(TIMConversationType.Group.value());
+                        } else {
+                            chatInfo.setType(TIMConversationType.C2C.value());
+                        }
+                        chatInfo.setId(userId);
+                        chatInfo.setChatName(conTitle);
+                        Intent intent = new Intent(activity, ChatActivity.class);
+                        intent.putExtra(Constants.CHAT_INFO, chatInfo);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+                    }
+                });
             }
         } catch (Exception ex) {
             throw new JSApplicationIllegalArgumentException("不能打开ChatActivity " + ex.getMessage());

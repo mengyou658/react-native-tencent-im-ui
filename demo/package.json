@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.3",
-    "react-native-tencent-im-ui": "^1.0.7",
+    "react-native-tencent-im-ui": "^1.0.8",
     "teaset": "^0.7.4"
   },
   "devDependencies": {

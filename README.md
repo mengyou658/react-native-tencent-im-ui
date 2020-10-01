@@ -1,4 +1,7 @@
 # react-native-tencent-im-ui 腾讯云即时通信 IM 服务的react-native，使用原生ui版本得sdk
+
+**安卓版本集成暂时有问题，请跳过这个项目。。。**
+
 起因，项目中需要用到基础的im功能（聊天和聊天列表），晚上搜了一圈也没有找到，技术栈已经定好，也只能硬着头皮搞了。
 
 直接给大家分享出来，目前功能简单，如果有简单需求的可以直接使用。
@@ -30,6 +33,10 @@ react-native 0.60 以上版本
 ### 2. link
 
 react-native 0.60以上 使用的autolink，注意需要 --save 参数，react-native会自动link
+
+#### android 特别处理
+需要在AndroidManifest.xml增加 activity
+`<activity android:name="com.yunchao.tencentim.activity.ChatActivity" />`
 
 ## 示例 请参考 demo 文件夹
 ##  接口
