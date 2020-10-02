@@ -46,10 +46,9 @@ static const int EXPIRETIME = 604800;
  *
  * 文档：https://cloud.tencent.com/document/product/269/32688#Server
  */
-+ (NSString *)genTestUserSig:(int)sdkAppId
-							secretKey:(NSString *)secretKey
-							userId:(NSString *)userId
-							;
+- (NSString *)genTestUserSig:(int)sdkAppId
+                   secretKey:(NSString *)secretKey
+                  identifier:(NSString *)identifier;
 @end
 
 NS_ASSUME_NONNULL_END

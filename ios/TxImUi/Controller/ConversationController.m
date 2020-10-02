@@ -139,6 +139,7 @@
         UINavigationController *rootVC = [self nc];
         rootVC.navigationBar.hidden = NO;
         ChatViewController *chat = [[ChatViewController alloc] init] ;
+        [chat initNc: rootVC];
         chat.conversationData = conversation.convData;
         [rootVC pushViewController:chat animated:YES];
 //    });

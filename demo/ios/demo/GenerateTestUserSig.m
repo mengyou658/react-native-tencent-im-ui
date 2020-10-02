@@ -4,7 +4,7 @@
 
 @implementation GenerateTestUserSig
 
-+ (NSString *)genTestUserSig:(int)sdkAppId
+- (NSString *)genTestUserSig:(int)sdkAppId
                             secretKey:(NSString *)secretKey
                             identifier:(NSString *)identifier
 {
@@ -12,7 +12,7 @@
     long TLSTime = floor(current);
     NSMutableDictionary *obj = [@{@"TLS.ver": @"2.0",
                                   @"TLS.identifier": identifier,
-                                  @"TLS.sdkappid": @(SDKAPPID),
+                                  @"TLS.sdkappid": @(sdkAppId),
                                   @"TLS.expire": @(EXPIRETIME),
                                   @"TLS.time": @(TLSTime)} mutableCopy];
     NSMutableString *stringToSign = [[NSMutableString alloc] init];
@@ -25,7 +25,8 @@
     }
     NSLog(@"%@", stringToSign);
     //NSString *sig = [self sigString:stringToSign];
-    NSString *sig = [self hmac:stringToSign];
+    NSString *sig = [self hmac:stringToSign
+                              secretKey:secretKey];
 
     obj[@"TLS.sig"] = sig;
     NSLog(@"sig: %@", sig);
@@ -51,20 +52,21 @@
     return result;
 }
 
-+ (NSString *)hmac:(NSString *)plainText
+- (NSString *)hmac:(NSString *)plainText
+         secretKey:(NSString *)secretKey
 {
-    const char *cKey  = [SECRETKEY cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *cKey  = [secretKey cStringUsingEncoding:NSASCIIStringEncoding];
     const char *cData = [plainText cStringUsingEncoding:NSASCIIStringEncoding];
 
     unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
-
+	
     CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
 
     NSData *HMACData = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
     return [HMACData base64EncodedStringWithOptions:0];
 }
 
-+ (NSString *)base64URL:(NSData *)data
+- (NSString *)base64URL:(NSData *)data
 {
     NSString *result = [data base64EncodedStringWithOptions:0];
     NSMutableString *final = [[NSMutableString alloc] init];

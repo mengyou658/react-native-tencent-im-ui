@@ -9,9 +9,7 @@
 #import "TUIKit.h"
 #import <ImSDK/V2TIMManager.h>
 #import <ImSDK/TIMCallback.h>
-#import "RNTIMManager.h"
 #import "TUIConversationListController.h"
-#import "ChatView.h"
 #import "DemoModule.h"
 #import "GenerateTestUserSig.h"
 @implementation DemoModule
@@ -19,12 +17,15 @@
 RCT_EXPORT_MODULE(DemoModule);
 RCT_EXPORT_METHOD(getSig:(int)sdkAppId
 		secretKey:(NSString *)secretKey
-		userId:(NSString *)userId
+    identifier:(NSString *)identifier
 		resolver:(RCTPromiseResolveBlock)resolve
         rejecter:(RCTPromiseRejectBlock)reject		
 	)
 {
-  NSString *str = [GenerateTestUserSig genTestUserSig: sdkAppId secretKey userId];
+  GenerateTestUserSig *generateTestUserSig = [[GenerateTestUserSig alloc] init];
+  NSString *str = [generateTestUserSig genTestUserSig: sdkAppId
+                                            secretKey:secretKey
+                                           identifier:identifier];
   resolve(str);
 }
 

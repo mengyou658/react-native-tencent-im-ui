@@ -30,7 +30,7 @@ import {TIMInitSdk, TIMLogin, TIMLogout, TIMStartChat} from 'react-native-tencen
 
 import {SDKAPPID, SECRETKEY, genTestUserSig} from './src/genSig';
 import Conversation from './src/conView';
-let userId = '云超';
+let userId = 'test1';
 let userIdTo = '梦游';
 
 class App extends Component {
@@ -40,11 +40,17 @@ class App extends Component {
     try {
       TIMInitSdk(SDKAPPID);
       Toast.success("初始化成功");
-      TIMLogin(userId, await genTestUserSig(userId)).then(res=>{
-        Toast.success(userId + "登录成功");
-      }).catch(e => {
-        Toast.fail(userId + "登录失败");
-      });
+      // var userSig = await genTestUserSig(userId); // 这样写ios一直卡住，没有深入研究，换成then则没问题了
+      genTestUserSig(userId).then(userSig => {
+        console.log('genTestUserSig', userSig);
+        TIMLogin(userId, userSig).then(res=>{
+          Toast.success(userId + "登录成功");
+        }).catch(e => {
+          Toast.fail(userId + "登录失败");
+        });
+      })
+      
+      
     } catch (e) {
       console.log('fail', e)
       Toast.fail("初始化失败，请检查SDKAPPID");

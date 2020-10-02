@@ -352,7 +352,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-  [self.navigationController setNavigationBarHidden:YES animated:animated];
+  // [self.navigationController setNavigationBarHidden:YES animated:animated];
+  NSLog(@"Chat viewWillDisappear");
   UINavigationController *rootVC = [self nc];
   rootVC.navigationBar.hidden = YES;
 
