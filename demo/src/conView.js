@@ -11,7 +11,7 @@ export default class Conversation extends React.Component {
 
   render() {
     return <SafeAreaView style={{flex:1, paddingTop: (Platform.OS === 'ios' ?  10 : StatusBar.currentHeight)}}>
-      <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={"dark-content"} animated={true} />
+      <StatusBar backgroundColor={'transparent'} translucent={true} animated={true} />
       <TIMConversationModel style={{ flex: 1 }}  {...this.props} />
     </SafeAreaView>
   }

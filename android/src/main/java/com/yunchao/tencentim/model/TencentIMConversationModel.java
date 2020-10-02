@@ -42,7 +42,8 @@ public class TencentIMConversationModel extends SimpleViewManager<View> {
         mConversationLayout = conversationView.findViewById(R.id.conversation_layout);
         // 会话列表面板的默认UI和交互初始化
         mConversationLayout.initDefault();
-        mConversationLayout.getTitleBar().setVisibility(View.INVISIBLE);
+        mConversationLayout.getTitleBar().getMiddleTitle().setText("会话列表");
+        mConversationLayout.getTitleBar().setVisibility(View.GONE);
         //隐藏titleBar
         mConversationLayout.setBackground(new ColorDrawable(Color.parseColor("#F7F9F8")));
         // 设置adapter item头像圆角大小
