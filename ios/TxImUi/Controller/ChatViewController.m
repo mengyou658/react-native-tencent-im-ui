@@ -33,7 +33,6 @@
 #import "TCUtil.h"
 #import "THelper.h"
 #import "TCConstants.h"
-#import "AppDelegate.h"
 
 // MLeaksFinder 会对这个类误报，这里需要关闭一下
 @implementation UIImagePickerController (Leak)
@@ -58,6 +57,12 @@
   });
   return instance;
 }
+
+
+- (void) initNc:(UINavigationController *)nc {
+    self.nc = nc;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -348,8 +353,7 @@
 {
   [super viewWillDisappear:animated];
   [self.navigationController setNavigationBarHidden:YES animated:animated];
-  AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-  UINavigationController *rootVC = (UINavigationController *)(delegate.window.rootViewController);
+  UINavigationController *rootVC = [self nc];
   rootVC.navigationBar.hidden = YES;
 
 }

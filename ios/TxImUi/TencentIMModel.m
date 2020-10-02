@@ -10,7 +10,7 @@
 #import "TUIKit.h"
 #import <ImSDK/V2TIMManager.h>
 #import <ImSDK/TIMCallback.h>
-#import "RNTIMManager.h"
+#import "TencentIMManager.h"
 
 @implementation TencentIMModel
 
@@ -21,7 +21,7 @@ RCT_EXPORT_MODULE(TencentIMModel);
  */
 RCT_EXPORT_METHOD(initSdk:(int)sdkAppId)
 {
-  RNTIMManager *tm = [RNTIMManager getInstance];
+  TencentIMManager *tm = [TencentIMManager getInstance];
   TIMSdkConfig *sdkConfig = [TIMSdkConfig new];
   sdkConfig.sdkAppId = sdkAppId;
   [tm initSdk:sdkConfig];
@@ -39,7 +39,7 @@ RCT_EXPORT_METHOD(login:(NSString *)identify
                      resolver:(RCTPromiseResolveBlock)resolve
                      rejecter:(RCTPromiseRejectBlock)reject)
 {
-  RNTIMManager *tm = [RNTIMManager getInstance];
+  TencentIMManager *tm = [TencentIMManager getInstance];
   [tm loginWithIdentify:identify
                        userSig:userSig
                        succ:^{
@@ -60,7 +60,7 @@ RCT_EXPORT_METHOD(login:(NSString *)identify
  */
 RCT_EXPORT_METHOD(logout:(RCTPromiseResolveBlock)resolve
 rejecter:(RCTPromiseRejectBlock)reject){
-  RNTIMManager *tm = [RNTIMManager getInstance];
+  TencentIMManager *tm = [TencentIMManager getInstance];
   [tm logoutWithSucc:^{
     resolve(@(YES));
   }                  fail:^(int code, NSString *msg) {
@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(startChatView: (NSString *)identify
                        title:(NSString *)title
                        type:(int)type){
   // NSLog(@"startChat：%@",identify);
-  RNTIMManager *tm = [RNTIMManager getInstance];
+  TencentIMManager *tm = [TencentIMManager getInstance];
   [tm startChat:identify
    title:title
    type:type];

@@ -6,15 +6,13 @@
 //  Copyright © 2019 feewee. All rights reserved.
 //
 
-#import "RNTIMManager.h"
+#import "TencentIMManager.h"
 #import "TUIKit.h"
 #import <ImSDK/V2TIMManager.h>
 #import <ImSDK/TIMCallback.h>
 #import "ConversationController.h"
-#import "AppDelegate.h"
-#import "ChatViewController.h"
 
-@implementation RNTIMManager {
+@implementation TencentIMManager {
   /// 是否初始化
   BOOL isInit;
   /// 应用ID
@@ -31,7 +29,7 @@
 
 
 + (instancetype)getInstance {
-  __strong static RNTIMManager *instance;
+  __strong static TencentIMManager *instance;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     instance = [self new];

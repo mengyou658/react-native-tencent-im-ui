@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RNTIMManager : NSObject
+@interface TencentIMManager : NSObject
 
 /**
  * 获取实例

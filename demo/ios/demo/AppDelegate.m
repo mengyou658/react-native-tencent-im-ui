@@ -11,7 +11,7 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
-
+#import "ConversationController.h"
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -41,7 +41,15 @@ static void InitializeFlipper(UIApplication *application) {
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
-  self.window.rootViewController = rootViewController;
+  UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+  nv.navigationBar.hidden = YES;
+  nv.delegate = self;
+
+  self.window.rootViewController = nv;
+
+  ConversationController *c = [ConversationController getInstance];
+  [c initNc: nv];
+  
   [self.window makeKeyAndVisible];
   return YES;
 }

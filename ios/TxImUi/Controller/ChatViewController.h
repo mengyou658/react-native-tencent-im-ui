@@ -19,11 +19,12 @@
 @interface ChatViewController : UIViewController
 @property (nonatomic, strong) TUIConversationCellData *conversationData;
 @property (nonatomic, strong) TUnReadView *unRead;
+@property (nonatomic, strong) UINavigationController * nc;
 /**
  * 获取实例
  */
 + (instancetype)getInstance;
-
+- (void) initNc:(UINavigationController *)nc;
 - (void)viewDidLoadAsync;
 - (void)sendMessage:(TUIMessageCellData*)msg;
 @end

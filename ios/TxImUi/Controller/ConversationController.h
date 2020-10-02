@@ -14,11 +14,12 @@
 #import <UIKit/UIKit.h>
 
 @interface ConversationController : UIViewController
+@property (nonatomic, strong) UINavigationController * nc;
 /**
  * 获取实例
  */
 + (instancetype)getInstance;
-
+- (void) initNc:(UINavigationController *)nc;
 /**
  *跳转到对应的聊天界面
  */

@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.version          = package['version']
   s.summary          = package['description']
   s.description      = package['description']
-  s.homepage         = package['homepage']
+  s.homepage         = package['repository']['baseUrl']
   s.license          = package['license']
   s.author           = package['author']
   s.source           = { :git => package['repository']['url'], :tag => s.version.to_s }

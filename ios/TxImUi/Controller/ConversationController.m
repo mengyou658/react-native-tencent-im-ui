@@ -27,7 +27,6 @@
 #import "TCUtil.h"
 #import "TIMUserProfile+DataProvider.h"
 #import <ImSDK/ImSDK.h>
-#import "AppDelegate.h"
 
 @interface ConversationController () <TUIConversationListControllerDelegate, TPopViewDelegate>
 @property (nonatomic, strong) TNaviBarIndicatorView *titleView;
@@ -45,6 +44,11 @@
   });
   return instance;
 }
+
+- (void) initNc:(UINavigationController *)nc {
+    self.nc = nc;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     TUIConversationListController *conv = [[TUIConversationListController alloc] init];
@@ -113,11 +117,12 @@
     TUIConversationCellData *conversationData = [[TUIConversationCellData alloc] init];
     conversationData.groupID = groupID;
     conversationData.userID = userID;
+
   dispatch_async(dispatch_get_main_queue(), ^{
-      AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-      UINavigationController *rootVC = (UINavigationController *)(delegate.window.rootViewController);
+      UINavigationController *rootVC = [self nc];
       rootVC.navigationBar.hidden = NO;
       ChatViewController *chat = [[ChatViewController alloc] init] ;
+      [chat initNc: rootVC];
       chat.conversationData = conversationData;
       [rootVC pushViewController: chat animated:YES];
   });
@@ -130,8 +135,8 @@
 - (void)conversationListController:(TUIConversationListController *)conversationController didSelectConversation:(TUIConversationCell *)conversation
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-        UINavigationController *rootVC = (UINavigationController *)(delegate.window.rootViewController);
+        
+        UINavigationController *rootVC = [self nc];
         rootVC.navigationBar.hidden = NO;
         ChatViewController *chat = [[ChatViewController alloc] init] ;
         chat.conversationData = conversation.convData;
@@ -145,8 +150,7 @@
     [super viewWillAppear:animated];
 
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    AppDelegate *delegate = (AppDelegate *)([UIApplication sharedApplication].delegate);
-    UINavigationController *rootVC = (UINavigationController *)(delegate.window.rootViewController);
+    UINavigationController *rootVC = [self nc];
     rootVC.navigationBar.hidden = YES;
 }
 /**
