@@ -36,7 +36,7 @@ public class ChatActivity extends com.yunchao.tencentim.activity.BaseActivity {
     }
 
     private void chat(Intent intent) {
-        Bundle bundle = intent.getExtras();
+        final Bundle bundle = intent.getExtras();
         if (bundle == null) {
             return;
         } else {

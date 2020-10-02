@@ -1,4 +1,4 @@
-package com.demo;
+package com.yunchao.tencentim.demo;
 
 import android.text.TextUtils;
 import android.util.Base64;

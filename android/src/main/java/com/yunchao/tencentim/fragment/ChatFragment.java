@@ -3,6 +3,7 @@ package com.yunchao.tencentim.fragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +87,7 @@ public class ChatFragment extends BaseFragment {
                 }
             });
         }
+
         mChatLayout.getMessageLayout().setOnItemClickListener(new MessageLayout.OnItemClickListener() {
             @Override
             public void onMessageLongClick(View view, int position, MessageInfo messageInfo) {

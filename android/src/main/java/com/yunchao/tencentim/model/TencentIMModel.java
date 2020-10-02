@@ -2,7 +2,8 @@ package com.yunchao.tencentim.model;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
+import android.os.Handler;
+import android.util.Log;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -15,11 +16,13 @@ import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
 import com.tencent.qcloud.tim.uikit.config.GeneralConfig;
 import com.tencent.qcloud.tim.uikit.config.TUIKitConfigs;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
+import com.yunchao.tencentim.IMApplication;
 import com.yunchao.tencentim.activity.ChatActivity;
 import com.yunchao.tencentim.common.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.LogRecord;
 
 
 public class TencentIMModel extends ReactContextBaseJavaModule {
@@ -38,14 +41,22 @@ public class TencentIMModel extends ReactContextBaseJavaModule {
         GeneralConfig config = new GeneralConfig();
         // 显示对方是否已读的view将会展示
         config.setShowRead(true);
-        config.setAppCacheDir(getReactApplicationContext().getBaseContext().getFilesDir().getPath());
+        config.setAppCacheDir(IMApplication.getContext().getFilesDir().getPath());
         TUIKit.getConfigs().setGeneralConfig(config);
         return TUIKit.getConfigs();
     }
 
     @ReactMethod
     public void initSdk(final int sdkAppId) {
-        TUIKit.init(getReactApplicationContext().getBaseContext(), sdkAppId, getConfigs());
+        final Activity activity = getCurrentActivity();
+        if (null != activity) {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    TUIKit.init(IMApplication.getContext(), sdkAppId, getConfigs());
+                }
+            });
+        }
     }
 
     @ReactMethod
@@ -97,31 +108,22 @@ public class TencentIMModel extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void startChatView(final String userId, final String conTitle, final int type) {
+    public void startChatView(String userId, String conTitle, int type) {
+        final Activity activity = getCurrentActivity();
+        if (activity != null) {
 
-        try {
-            final Activity activity = getCurrentActivity();
-            if (activity != null) {
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ChatInfo chatInfo = new ChatInfo();
-                        if (type == 2) {
-                            chatInfo.setType(TIMConversationType.Group.value());
-                        } else {
-                            chatInfo.setType(TIMConversationType.C2C.value());
-                        }
-                        chatInfo.setId(userId);
-                        chatInfo.setChatName(conTitle);
-                        Intent intent = new Intent(activity, ChatActivity.class);
-                        intent.putExtra(Constants.CHAT_INFO, chatInfo);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        activity.startActivity(intent);
-                    }
-                });
+            ChatInfo chatInfo = new ChatInfo();
+            if (type == 2) {
+                chatInfo.setType(TIMConversationType.Group.value());
+            } else {
+                chatInfo.setType(TIMConversationType.C2C.value());
             }
-        } catch (Exception ex) {
-            throw new JSApplicationIllegalArgumentException("不能打开ChatActivity " + ex.getMessage());
+            chatInfo.setId(userId);
+            chatInfo.setChatName(conTitle);
+            final Intent intent = new Intent(activity, ChatActivity.class);
+            intent.putExtra(Constants.CHAT_INFO, chatInfo);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
         }
     }
 

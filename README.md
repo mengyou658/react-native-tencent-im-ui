@@ -1,7 +1,5 @@
 # react-native-tencent-im-ui 腾讯云即时通信 IM 服务的react-native，使用原生ui版本得sdk
 
-**安卓版本集成暂时有问题，请跳过这个项目。。。**
-
 起因，项目中需要用到基础的im功能（聊天和聊天列表），晚上搜了一圈也没有找到，技术栈已经定好，也只能硬着头皮搞了。
 
 直接给大家分享出来，目前功能简单，如果有简单需求的可以直接使用。
@@ -29,15 +27,29 @@ react-native 0.60 以上版本
 注意需要 --save 参数，react-native会自动link
 
 `$ npm install react-native-tencent-im-ui --save`
+`$ yarn add react-native-tencent-im-ui `
 
 ### 2. link
 
 react-native 0.60以上 使用的autolink，注意需要 --save 参数，react-native会自动link
 
 #### android 特别处理
-需要在AndroidManifest.xml增加 activity
+1. **需要在AndroidManifest.xml增加 activity**
 `<activity android:name="com.yunchao.tencentim.activity.ChatActivity" />`
+1. **在你自己的项目中的，android/app/src/main/java/<你的包名>/MainApplication.java 中onCreate()方法中增加如下**
+```java
+ @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+   ...
 
+    // 然后添加这一行，这里很重要，initSdk中使用到这个，初始化必须在主Application中初始化，否则会出现线程错误问题
+    IMApplication.setContext(this,  MainActivity.class); 
+   ...
+  }
+```
+1. demo 中增加的有华为push的示例（使用的低版本的push，高版本的总是提示安装hms-core，有点烦），完整的请参考腾讯im-sdk内的demo
 ## 示例 请参考 demo 文件夹
 ##  接口
 ```javascript
@@ -124,3 +136,7 @@ export default class Conversation extends React.Component {
 
 
 ```
+
+### 鸣谢项目
+1. [https://github.com/yz1311/react-native-txim/](https://github.com/yz1311/react-native-txim/)
+1. [https://github.com/kurisu994/react-native-txim](https://github.com/kurisu994/react-native-txim)

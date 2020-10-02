@@ -123,20 +123,13 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    packagingOptions {
-        pickFirst '**/libc++_shared.so'
-        doNotStrip "*/armeabi/libYTCommon.so"
-        doNotStrip "*/armeabi-v7a/libYTCommon.so"
-        doNotStrip "*/x86/libYTCommon.so"
-        doNotStrip "*/arm64-v8a/libYTCommon.so"
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
-        applicationId "com.demo"
+        applicationId "com.yunchao.tencentim.demo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -186,14 +179,40 @@ android {
 
         }
     }
+
+    packagingOptions {
+        pickFirst "**/libc++_shared.so"
+        doNotStrip "*/armeabi/libYTCommon.so"
+        doNotStrip "*/armeabi-v7a/libYTCommon.so"
+        doNotStrip "*/x86/libYTCommon.so"
+        doNotStrip "*/arm64-v8a/libYTCommon.so"
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+//    implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.android.support:multidex:1.0.1'
+
+    implementation 'com.tencent.imsdk:tuikit:5.0.6'
+    // HUAWEI push sdk
+    implementation 'com.huawei.android.hms:base:2.6.3.301'
+    implementation 'com.huawei.android.hms:push:2.6.3.301'
+    // MEIZU push sdk
+//    implementation 'com.meizu.flyme.internet:push-internal:3.9.7'
+    // google firebase
+//    implementation('com.google.firebase:firebase-core:17.0.0')
+    // google 云消息传递
+//    implementation ('com.google.firebase:firebase-messaging:19.0.1')
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // oppo push sdk
+//    implementation(name:'oppo_com.heytap.msp-push-2.1.0', ext:'aar')
+    // vivo push sdk
+//    implementation(name:'vivo_pushsdk-v2.9.0.0', ext:'aar')
+
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

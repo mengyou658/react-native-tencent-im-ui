@@ -1,6 +1,5 @@
-package com.demo;
+package com.yunchao.tencentim.demo;
 
-import androidx.annotation.NonNull;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;

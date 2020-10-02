@@ -1,19 +1,9 @@
-package com.demo;
+package com.yunchao.tencentim.demo;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Environment;
-import android.util.Log;
-import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class DemoModule extends ReactContextBaseJavaModule {
