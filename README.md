@@ -51,6 +51,42 @@ react-native 0.60以上 使用的autolink，注意需要 --save 参数，react-n
 ```
 1. demo 中增加的有华为push的示例（使用的低版本的push，高版本的总是提示安装hms-core，有点烦），完整的请参考腾讯im-sdk内的demo
 ## 示例 请参考 demo 文件夹
+
+android demo 截图
+
+![微信图片_20201002151638](README.assets/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201002151638.jpg)![微信图片_20201002151644](README.assets/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201002151644-1601623124924.jpg)
+
+ios demo 截图
+
+#### ios 特别处理
+1. **在你自己的项目中的，AppDelegate.m**
+
+   ```object
+   ...
+   // 引入头文件
+   #import "ConversationController.h"
+   ...
+   // 方法 didFinishLaunchingWithOptions 中修改
+   - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+   ...
+   
+   // 下面一行更改为
+   // self.window.rootViewController = rootViewController;
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    nv.navigationBar.hidden = YES;
+    nv.delegate = self;
+   
+    self.window.rootViewController = nv;
+   
+    ConversationController *c = [ConversationController getInstance];
+    [c initNc: nv];
+     
+   ...
+   
+   ```
+
+   
+
 ##  接口
 ```javascript
 
@@ -137,6 +173,6 @@ export default class Conversation extends React.Component {
 
 ```
 
-### 鸣谢项目
+### 参考鸣谢项目
 1. [https://github.com/yz1311/react-native-txim/](https://github.com/yz1311/react-native-txim/)
 1. [https://github.com/kurisu994/react-native-txim](https://github.com/kurisu994/react-native-txim)
