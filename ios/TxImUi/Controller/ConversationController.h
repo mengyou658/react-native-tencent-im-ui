@@ -23,5 +23,5 @@
 /**
  *跳转到对应的聊天界面
  */
-- (void)pushToChatViewController:(NSString *)groupID userID:(NSString *)userID;
+- (void)pushToChatViewController:(NSString *)groupID userID:(NSString *)userID title:(NSString *)title;
 @end

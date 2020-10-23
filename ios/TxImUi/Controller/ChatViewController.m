@@ -85,7 +85,7 @@
         data;
     })];
     _chat.moreMenus = moreMenus;
-    self.navigationController.navigationBar.hidden = NO; 
+    self.navigationController.navigationBar.hidden = NO;
     [self setupNavigator];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onRefreshNotification:)
@@ -100,7 +100,7 @@
 
 }
 - (void)viewDidLoadAsync {
-    
+
 }
 
 - (void)checkTitle {
@@ -348,7 +348,14 @@
 //{
 //
 //}
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSLog(@"navigationBar chat viewWillAppear");
+    // [self.navigationController setNavigationBarHidden:NO animated:animated];
+    UINavigationController *rootVC = [self nc];
+    rootVC.navigationBar.hidden = NO;
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];

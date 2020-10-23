@@ -138,7 +138,7 @@
   NSLog(@"startChat：%@",identify);
 
   ConversationController * vc = [ConversationController getInstance];
-  [vc pushToChatViewController:data.groupID userID:data.userID];
+  [vc pushToChatViewController:data.groupID userID:data.userID title:title];
 
 
 //  dispatch_async(dispatch_get_main_queue(), ^{

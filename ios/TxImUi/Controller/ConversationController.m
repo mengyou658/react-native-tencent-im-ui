@@ -58,7 +58,7 @@
 
     //如果不加这一行代码，依然可以实现点击反馈，但反馈会有轻微延迟，体验不好。
     conv.tableView.delaysContentTouches = NO;
-    
+
 
     UIButton *moreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [moreButton setImage:[UIImage imageNamed:TUIKitResource(@"more")] forState:UIControlStateNormal];
@@ -113,10 +113,11 @@
 /**
  *推送默认跳转
  */
-- (void)pushToChatViewController:(NSString *)groupID userID:(NSString *)userID {
+- (void)pushToChatViewController:(NSString *)groupID userID:(NSString *)userID title:(NSString *)title {
     TUIConversationCellData *conversationData = [[TUIConversationCellData alloc] init];
     conversationData.groupID = groupID;
     conversationData.userID = userID;
+    conversationData.title = title;
 
   dispatch_async(dispatch_get_main_queue(), ^{
       UINavigationController *rootVC = [self nc];
@@ -126,7 +127,7 @@
       chat.conversationData = conversationData;
       [rootVC pushViewController: chat animated:YES];
   });
- 
+
 }
 
 /**
@@ -135,7 +136,7 @@
 - (void)conversationListController:(TUIConversationListController *)conversationController didSelectConversation:(TUIConversationCell *)conversation
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        
+
         UINavigationController *rootVC = [self nc];
         rootVC.navigationBar.hidden = NO;
         ChatViewController *chat = [[ChatViewController alloc] init] ;
