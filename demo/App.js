@@ -30,7 +30,7 @@ import {TIMInitSdk, TIMLogin, TIMLogout, TIMStartChat} from 'react-native-tencen
 
 import {SDKAPPID, SECRETKEY, genTestUserSig} from './src/genSig';
 import Conversation from './src/conView';
-let userId = 'test1';
+let userId = '游子';
 let userIdTo = '梦游';
 
 class App extends Component {
@@ -49,8 +49,8 @@ class App extends Component {
           Toast.fail(userId + "登录失败");
         });
       })
-      
-      
+
+
     } catch (e) {
       console.log('fail', e)
       Toast.fail("初始化失败，请检查SDKAPPID");

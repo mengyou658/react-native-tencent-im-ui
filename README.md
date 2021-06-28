@@ -117,6 +117,8 @@ react-native 0.60以上 使用的autolink，注意需要 --save 参数，react-n
 	```
 
 ## 五、示例 请参考 demo 文件夹
+注意，LiteAVSDK_TRTC不支持模拟器运行，请使用真机运行
+
 android demo 截图
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20201002214658908.jpg#pic_center)

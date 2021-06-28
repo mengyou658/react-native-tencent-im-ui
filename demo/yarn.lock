@@ -5532,10 +5532,10 @@ react-native-legacy-components@^0.1.3:
     react-timer-mixin "^0.13.2"
     rebound "^0.0.13"
 
-react-native-tencent-im-ui@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.npm.taobao.org/react-native-tencent-im-ui/download/react-native-tencent-im-ui-1.0.8.tgz#d015328ee83db9b9e63fc5fd493f7cedc8f27755"
-  integrity sha1-0BUyjug9ubnmP8X9ST987cjyd1U=
+react-native-tencent-im-ui@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.nlark.com/react-native-tencent-im-ui/download/react-native-tencent-im-ui-1.1.3.tgz?cache=0&sync_timestamp=1624839668719&other_urls=https%3A%2F%2Fregistry.nlark.com%2Freact-native-tencent-im-ui%2Fdownload%2Freact-native-tencent-im-ui-1.1.3.tgz#beccad83035d621b54b11fa6546a69ee1c88f840"
+  integrity sha1-vsytgwNdYhtUsR+mVGpp7hyI+EA=
 
 react-native@0.63.3:
   version "0.63.3"

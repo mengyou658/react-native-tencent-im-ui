@@ -198,6 +198,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.1'
 
     implementation 'com.tencent.imsdk:tuikit:5.0.6'
+    implementation group: 'com.tencent.liteav', name: 'LiteAVSDK_TRTC', version: '7.2.8949'
     // HUAWEI push sdk
     implementation 'com.huawei.android.hms:base:2.6.3.301'
     implementation 'com.huawei.android.hms:push:2.6.3.301'
